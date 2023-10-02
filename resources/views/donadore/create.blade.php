@@ -25,26 +25,42 @@
     </style>  
 </head>
 
-<form method="POST" action="{{ route('banner.store') }}">
+
+<form method="POST" action="{{ route('donadore.store') }}">
     @csrf
     <div class="container mt-4">
         <label for="" class="form-label" >NOMBRE</label>
-        <input id="nombre" name="nombre" type="text" class="form-control" tabindex="1" value="{{old('nombre')}}">
-        @error('nombre')
+        <input id="usuario" name="usuario" type="text" class="form-control" tabindex="1" value="{{old('usuario')}}">
+        @error('usuario')
+            <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
+        @enderror
+    </div>
+    
+   <div class="container mt-4">
+    <label for="" class="form-label">Estatura</label>
+    <input id="talla" name="talla" type="number" class="form-control" tabindex="2" value="{{old('talla')}}">
+        @error('talla')
             <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
         @enderror
     </div>
     <div class="container mt-4">
-        <label for="" class="form-label">APELLIDO</label>
-        <input id="apellido" name="apellido" type="text" class="form-control" tabindex="1" value="{{old('apellido')}}">
-        @error('apellido')
-            <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
-        @enderror
-    </div>
-   <div class="container mt-4">
-    <label for="edad" class="form-label">EDAD</label>
-    <input id="edad" name="edad" type="number" class="form-control" tabindex="2" value="{{old('edad')}}">
-        @error('edad')
+        <label for="" class="form-label">EDAD</label>
+        <input id="edad" name="edad" type="number" class="form-control" tabindex="2" value="{{old('edad')}}">
+            @error('edad')
+                <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
+            @enderror
+        </div>
+        <div class="container mt-4">
+            <label for="" class="form-label">PESO</label>
+            <input id="peso" name="peso" type="number" class="form-control" tabindex="2" value="{{old('peso')}}">
+                @error('peso')
+                    <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
+                @enderror
+            </div>
+            <div class="container mt-4">
+        <label for="" class="form-label">SEXO</label>
+        <input id="sexo" name="sexo" type="text" class="form-control" tabindex="1" value="{{old('sexo')}}">
+        @error('sexo')
             <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
         @enderror
     </div>
@@ -57,22 +73,11 @@
         @enderror
     </div>
     <div class="container mt-4">
-        <label for="" class="form-label">Telefono</label>
-        <input id="telefono" name="telefono" type="number" class="form-control" tabindex="2" value="{{old('telefono')}}">
-        @error('telefono')
+        <label for="" class="form-label">Fecha</label>
+        <input id="fecha" name="fecha" type="date" class="form-control" tabindex="2" value="{{old('fecha')}}">
+        @error('fecha')
             <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
         @enderror
-    </div>
-    <div class="container mt-4">
-        <label for="" class="form-label">DIRECCION DE CORREO</label>
-        <input id="email" name="email" type="email" class="form-control" tabindex="1" value="{{old('email')}}">
-        @error('email')
-            <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
-        @enderror
-    </div>
-    <div class="container mt-4">
-        <label for="" class="form-label">COMENTARIO</label>
-        <input id="comentario" name="comentario" type="text" class="form-control" tabindex="1" value="{{old('comentario')}}">
     </div>
     <div class="container mt-4">
     <a href="/donadoresperu/public/banner"class="btn btn-success" tabindex="5">Cancelar</a>

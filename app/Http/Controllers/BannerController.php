@@ -6,6 +6,8 @@ use App\Models\Banner;
 use Illuminate\Console\View\Components\Choice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class BannerController extends Controller
 {
@@ -30,6 +32,16 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'edad' => ['required','integer','min:18','max:50'],
+            'telefono' => ['required','size:9'],
+            'email' => ['required','email:rfc,dns'],
+            'tipo' => ['required', 'in:a-,A-,b-,B-,ab-,AB-,o-,O-,rh-,RH-,a+,A+,b+,B+,ab+,AB+,o+,O+,rh+,RH+'],
+
+        ]);
         $banners =new Banner();
         $banners->nombre=$request->get('nombre');
         $banners->apellido=$request->get('apellido');

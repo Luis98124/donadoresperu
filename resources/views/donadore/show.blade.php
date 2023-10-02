@@ -1,0 +1,2 @@
+@extends('donadore.app')
+
