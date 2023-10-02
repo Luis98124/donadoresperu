@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\DonadoreController;
+use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::resource('banner','App\Http\Controllers\BannerController');
 Route::resource('donadore','App\Http\Controllers\DonadoreController');
-
+Route::resource('solicituds','App\Http\Controllers\SolicitudController');
 
 Auth::routes();
 
