@@ -22,10 +22,10 @@ class Solicitud extends Model
 {
     
     static $rules = [
-		'solicitante' => 'required',
-		'nombre_apellidos' => 'required',
-		'DNI' => 'required',
-		'tipo_sangre' => 'required',
+      'solicitante' => 'required|in:usuario,familiar',
+      'nombre_apellidos' => 'required|string',
+      'DNI' => 'required|string|regex:/^[1-9][0-9]{7}$/|max:8',
+      'tipo_sangre' => 'required|in:a-,A-,b-,B-,ab-,AB-,o-,O-,rh-,RH-,a+,A+,b+,B+,ab+,AB+,o+,O+,rh+,RH+'
     ];
 
     protected $perPage = 20;
