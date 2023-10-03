@@ -28,7 +28,7 @@
                 <img src="http://localhost/DONADORESPERU/resources/views/banner/Maps.png" alt="Logo" width="30" height="20" class="d-inline-block align-text-top"></a>
                 <a class="navbar-brand" style="color: #ffffff" href="{{route('banner.mapa')}}">Locales Autorizados</a>
                 <a class="navbar-brand" style="color: #ffffff" href="{{route('donadore.create')}}">DONAR</a>
-                <a class="navbar-brand" style="color: #ffffff" href="{{route('donadore.create')}}">SOLICITAR SANGRE</a>
+                <a class="navbar-brand" style="color: #ffffff" href="{{route('solicituds.create')}}">SOLICITAR SANGRE</a>
                 <div class="collapse navbar-collapse " id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto ">
