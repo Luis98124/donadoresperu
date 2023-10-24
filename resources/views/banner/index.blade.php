@@ -1,96 +1,91 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    @extends('layouts.app')
-
-@section('content')
-
+ 
+@extends('layouts.app')
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
+    body{
+        background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
     }
+</style>
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
 
-    header {
-        background-color: #1d5768;
-        color: #fff;
-        text-align: center;
-        padding: 5px;
-        box-shadow: 0 0 500px #18aad7;
-    }
+                            <span id="card_title">
+                                Registro En Campañas
+                            </span>
 
-    h1 {
-        font-size: 36px;
-    }
+                             <div class="float-right">
+                                <a href="{{ route('banner.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
+                                </a>
+                              </div>
+                              <form action="{{ route('banner.index') }}" method="get" class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="busqueda">
+                                <button class="btn btn-success" type="submit" value="Buscar">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 500px #18aad7;
-    }
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>No</th>
+                                        
+										<th>Nombre</th>
+										<th>Apellido</th>
+										<th>Edad</th>
+										<th>Tipo De Sangre</th>
+										<th>Telefono</th>
+										<th>Email</th>
+										<th>Comentario</th>
+                                        <th>Verificación</th>
 
-    p {
-        font-size: 18px;
-        line-height: 1.6;
-        
-    }
 
-    .donate-button {
-        display: inline-block;
-        background-color: #18aad7;
-        color: #fff;
-        padding: 10px 20px;
-        font-size: 20px;
-        text-decoration: none;
-        border-radius: 29px;
-        margin-top: 10px;
-        
-    }
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($banners as $banner)
+                                        <tr>
+                                            <td>{{ $banner->id}}</td>
+                                            
+											<td>{{ $banner->nombre }}</td>
+											<td>{{ $banner->apellido }}</td>
+											<td>{{ $banner->edad }}</td>
+											<td>{{ $banner->tipo }}</td>
+											<td>{{ $banner->telefono }}</td>
+											<td>{{ $banner->email }}</td>
+											<td>{{ $banner->comentario }}</td>
+											<td>{{ $banner->verificacion }}</td>
 
-        .donate-button:hover {
-            background-color: #18aad7;
-        }
-
-    .content {
-        display: flex;
-        align-items: flex-start; /* Alinea el contenido arriba */
-        justify-content:space-around; /* Espacio entre la imagen y el texto */
-    }
-
-    .responsive-image {
-        max-width: 50%;
-        height: auto;
-        float: right; /* Coloca la imagen a la derecha */
-        margin: 20px auto;
-    }
-</style>   
-</head>
-<body>
-<header>
-    <h1>¡Salva Vidas!</h1>
-    <p>Únete a nuestra campaña de donación de sangre y ayuda a quienes más lo necesitan.</p>
-</header>
-
-<div class="container">
-    <div class="content">
-        <!-- Utiliza la URL de la imagen en el atributo src -->
-        <img class="responsive-image" src="https://st.depositphotos.com/1007566/3186/v/950/depositphotos_31868859-stock-illustration-donate-blood.jpg" alt="Donación de Sangre">
-
-        <div>
-            <h2>¿Por qué donar sangre?</h2>
-            <p>La donación de sangre es un acto de generosidad que puede salvar vidas. Cada donación cuenta y puede marcar la diferencia en la vida de alguien que lo necesita.</p>
-
-            <h2>¿Cómo puedes ayudar?</h2>
-            <p>Si estás interesado en donar sangre y ser parte de esta noble causa, ¡te animamos a hacerlo! Puedes encontrar más información y programar una cita de donación haciendo clic en el botón de abajo.</p>
-
-            <a class="donate-button" href="{{route('banner.create')}}">REGISTRARME EN CAMPAÑA</a>
+                                            <td>
+                                                <form action="{{ route('banner.destroy',$banner->id) }}" method="POST">
+                                                    
+                                                    <a class="btn btn-sm btn-success" href="{{ route('banner.edit',$banner->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {!! $banners->links() !!}
+            </div>
         </div>
     </div>
-</div>
-</body>
-
 @endsection
-
-    
