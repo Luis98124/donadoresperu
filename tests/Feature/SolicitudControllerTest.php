@@ -7,7 +7,10 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
+<<<<<<< HEAD
 
+=======
+>>>>>>> gula
 class SolicitudControllerTest extends TestCase
 {
     use RefreshDatabase; // Para ejecutar las pruebas en una base de datos de prueba
@@ -16,6 +19,13 @@ class SolicitudControllerTest extends TestCase
     /**
      * A basic feature test example.
      */
+<<<<<<< HEAD
+=======
+    public function __construct() {
+        $this->middleware('can:solicituds.create')->only('create');
+        $this->middleware('can:solicituds.index')->only('edit','destroy','show','store','index');
+    }
+>>>>>>> gula
     public function testStore()
     {
         // Genera datos de prueba que cumplan con las restricciones de validación

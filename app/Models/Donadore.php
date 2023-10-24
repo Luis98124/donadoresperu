@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Donadore extends Model
 {
     use HasFactory;
+<<<<<<< HEAD
     protected $fillable = [
         'usuario', // Agrega el atributo 'usuario' a la lista fillable
         'talla',
@@ -18,11 +19,8 @@ class Donadore extends Model
         'tipo',
         // Otros atributos aquí
     ];
+=======
+   
+>>>>>>> gula
 }
-class User extends Model
-{
-    public function User()
-    {
-        return $this->hasOne(User::class);
-    }
-}
+

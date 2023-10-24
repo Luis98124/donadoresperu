@@ -18,12 +18,22 @@ use Illuminate\Support\Facades\Route;
 */
 Route::resource('banner','App\Http\Controllers\BannerController');
 Route::resource('donadore','App\Http\Controllers\DonadoreController');
+<<<<<<< HEAD
 Route::resource('solicituds','App\Http\Controllers\SolicitudController');
+=======
+Route::resource('solicitud','App\Http\Controllers\SolicitudController');
+Route::resource('principal','App\Http\Controllers\PrincipalController');
+
+>>>>>>> gula
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::redirect('/home','http://localhost/donadoresperu/public/banner');
-Route::redirect('/', 'http://localhost/donadoresperu/public/banner');
+Route::redirect('/home','http://localhost/donadoresperu/public/principal');
+Route::redirect('/', 'http://localhost/donadoresperu/public/principal');
 Route::get('/nuevo', 'App\Http\Controllers\BannerController@nuevo')->name('banner.nuevo');
 Route::get('/mapa', 'App\Http\Controllers\BannerController@mapa')->name('banner.mapa');
+<<<<<<< HEAD
+=======
+
+>>>>>>> gula

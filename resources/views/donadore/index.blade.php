@@ -1,96 +1,99 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    @extends('donadore.app')
+ 
+@extends('layouts.app')
+<style>
+    body{
+        background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
+    }
+</style>
 
 @section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">@can('admin')  
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-    }
+                            <span id="card_title">
+                                Registro de todos los donadores
+                            </span>
 
-    header {
-        background-color: #1d5768;
-        color: #fff;
-        text-align: center;
-        padding: 5px;
-        box-shadow: 0 0 500px #18aad7;
-    }
+                             <div class="float-right">
+                                <a href="{{ route('donadore.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
+                                </a>
+                              </div>
+                              <form action="{{ route('donadore.index') }}" method="get" class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="busqueda">
+                                <button class="btn btn-success" type="submit" value="Buscar">Search</button>
+                            </form>@endcan
+                        </div>
+                    </div>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
 
-    h1 {
-        font-size: 36px;
-    }
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        @can('admin')  
+                                        <th>No</th>@endcan
+										<th>USUARIO</th>
+                                        @can('admin')  
+										<th>DNI</th>
+										<th>TALLA</th>
+										<th>FECHA DE NACIMIENTO</th>
+										<th>PESO</th>
+										<th>SEXO</th>
+										<th>FECHA DE ULTIMA DONACION</th>@endcan
+										<th>TIPO DE SANGRE</th>
+										<th>TELEFONO</th>
+										<th>EMAIL</th>
+                                        <th>ESTADO DE VERIFICACION</th>
 
-    .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 500px #18aad7;
-    }
 
-    p {
-        font-size: 18px;
-        line-height: 1.6;
-        
-    }
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($donadore as $donadores)
+                                        <tr>
+                                            @can('admin')  <td>{{ $donadores->id}}</td> @endcan            
+                                            
+											<td>{{ $donadores->usuario }}</td>
+											@can('admin')<td>{{ $donadores->dni }}</td>
+											<td>{{ $donadores->talla }}</td>
+											<td>{{ $donadores->fnacimiento }}</td>
+											<td>{{ $donadores->peso }}</td>
+											<td>{{ $donadores->sexo }}</td>
+											<td>{{ $donadores->fecha }}</td>@endcan
+											<td>{{ $donadores->tipo }}</td>
+											<td>{{ $donadores->telefono }}</td>
+											<td>{{ $donadores->correo}}</td>
+											<td>{{ $donadores->verificaccion }}</td>
 
-    .donate-button {
-        display: inline-block;
-        background-color: #18aad7;
-        color: #fff;
-        padding: 10px 20px;
-        font-size: 20px;
-        text-decoration: none;
-        border-radius: 29px;
-        margin-top: 10px;
-        
-    }
-
-        .donate-button:hover {
-            background-color: #18aad7;
-        }
-
-    .content {
-        display: flex;
-        align-items: flex-start; /* Alinea el contenido arriba */
-        justify-content:space-around; /* Espacio entre la imagen y el texto */
-    }
-
-    .responsive-image {
-        max-width: 50%;
-        height: auto;
-        float: right; /* Coloca la imagen a la derecha */
-        margin: 20px auto;
-    }
-</style>   
-</head>
-<body>
-<header>
-    <h1>Gracias Por Unirte</h1>
-    <p>Únete a nuestra campaña de donación de sangre y ayuda a quienes más lo necesitan.</p>
-</header>
-
-<div class="container">
-    <div class="content">
-        <!-- Utiliza la URL de la imagen en el atributo src -->
-        <img class="responsive-image" src="https://st.depositphotos.com/1007566/3186/v/950/depositphotos_31868859-stock-illustration-donate-blood.jpg" alt="Donación de Sangre">
-
-        <div>
-            <h2>¿Porque Donar Sangre?</h2>
-            <p>La donación de sangre es un acto de generosidad que puede salvar vidas. Cada donación cuenta y puede marcar la diferencia en la vida de alguien que lo necesita.</p>
-
-            <h2>¿Cómo puedes ayudar?</h2>
-            <p>Si estás interesado en donar sangre y ser parte de esta noble causa, ¡te animamos a hacerlo! Puedes encontrar más información y programar una cita de donación haciendo clic en el botón de abajo.</p>
-
-            <a class="donate-button" href="{{route('banner.create')}}">REGISTRARME EN CAMPAÑA</a>
+                                            <td>@can('admin') 
+                                                <form action="{{ route('donadore.destroy',$donadores->id) }}" method="POST">
+                                                    
+                                                    <a class="btn btn-sm btn-success" href="{{ route('donadore.edit',$donadores->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                </form>@endcan
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                {!! $donadore->links() !!}
+            </div>
         </div>
     </div>
-</div>
-</body>
-
 @endsection
-
-    

@@ -7,6 +7,16 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Auth;
+use App\Models\Banner;
+use Carbon\Carbon;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+use Laravel\Ui\Presets\React;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Ignition\Contracts\Solution;
+
+
+
 
 /**
  * Class DonadoreController
@@ -21,9 +31,17 @@ class DonadoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('donadore.index');
+        $busqueda = $request ->busqueda;
+        $donadores=Donadore::where('usuario','LIKE','%'.$busqueda.'%')
+        ->orWhere('dni','LIKE','%'.$busqueda.'%')
+        ->orWhere('tipo','LIKE','%'.$busqueda.'%')->latest('id')->PAGINATE();
+        $data =[
+            'donadore'=>$donadores
+        ];
+        return view('donadore.index',$data);
+        
     }
 
     /**
@@ -40,49 +58,85 @@ class DonadoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'talla' => ['required','integer','min:150','max:180'],
-            'peso' => ['required','integer','min:55','max:90'],
-            'edad' => ['required','integer','min:18','max:50'],
-            'fecha' => ['required'],
-            'tipo' => ['required', 'in:a-,A-,b-,B-,ab-,AB-,o-,O-,rh-,RH-,a+,A+,b+,B+,ab+,AB+,o+,O+,rh+,RH+'],
-
+            'dni' => ['required', 'size:8'],
+            'talla' => ['required', 'integer', 'min:150', 'max:180', 'imc'],
+            'peso' => ['required', 'integer', 'min:55', 'max:90', 'imc'],
+            'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'sexo' => ['required'],
+            'telefono' => ['required', 'size:9'],
+            'correo' => ['required','email:rfc,dns'],
+            'tipo' => ['required'],
+            'fecha' => ['required', 'date_format:Y-m-d', 'fecha'],
+            'imc' => ['imc'], // Aquí utilizamos la regla personalizada 'imc'
         ]);
-        $donadore = Donadore::create($request->all());
+        
         $donadores =new Donadore();
         $donadores->usuario=$request->get('usuario');
+        $donadores->dni=$request->get('dni');
         $donadores->talla=$request->get('talla');
-        $donadores->edad=$request->get('edad');
+        $donadores->fnacimiento=$request->get('fnacimiento');
         $donadores->peso=$request->get('peso');
         $donadores->sexo=$request->get('sexo');
         $donadores->fecha=$request->get('fecha');
         $donadores->tipo=$request->get('tipo');
+        $donadores->telefono=$request->get('telefono');
+        $donadores->correo=$request->get('correo');
+        $donadores->verificaccion=("Proceso");
         $donadores->save();
         return redirect('/donadore');
         
     }
 
 
-    public function show($id)
-    {
-        
-    }
-
-
     public function edit($id)
     {
+        $donadore = Donadore::find($id);
 
+        return view('donadore.edit')->with('donadore',$donadore);
     }
 
 
-    public function update(Request $request, Donadore $donadore)
+    public function update(Request $request,string $id)
     {
+        $request->validate([
+            'dni' => ['required', 'size:8'],
+            'talla' => ['required', 'integer', 'min:150', 'max:180', 'imc'],
+            'peso' => ['required', 'integer', 'min:55', 'max:90', 'imc'],
+            'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'sexo' => ['required'],
+            'telefono' => ['required', 'size:9'],
+            'correo' => ['required','email:rfc,dns'],
+            'tipo' => ['required'],
+            'fecha' => ['required', 'date_format:Y-m-d', 'fecha'],
+            'imc' => ['imc'], // Aquí utilizamos la regla personalizada 'imc'
+        ]);
+        $donadores =Donadore::find($id);
+        $donadores->usuario=$request->get('usuario');
+        $donadores->dni=$request->get('dni');
+        $donadores->talla=$request->get('talla');
+        $donadores->fnacimiento=$request->get('fnacimiento');
+        $donadores->peso=$request->get('peso');
+        $donadores->sexo=$request->get('sexo');
+        $donadores->fecha=$request->get('fecha');
+        $donadores->tipo=$request->get('tipo');
+        $donadores->telefono=$request->get('telefono');
+        $donadores->correo=$request->get('correo');
+        $donadores->verificaccion=$request->get('verificaccion');
+        $donadores->save();
+        return redirect('/donadore');
 
     }
 
 
     public function destroy($id)
     {
+        $donadore = Donadore::find($id)->delete();
+            return redirect()->route('donadore.index');
 
+    }
+    private function calcularIMC($talla, $peso) {
+        $alturaMetros = $talla / 100; // Convertir la altura a metros
+        return $peso / ($alturaMetros * $alturaMetros);
     }
  
 }

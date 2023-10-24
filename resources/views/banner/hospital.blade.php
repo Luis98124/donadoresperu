@@ -5,6 +5,7 @@
         background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
     }
 </style>
+
 @section('content')
 <script>
     function mostrarMapa(mapUrl) {
@@ -18,7 +19,7 @@
     .map-container {
       position: relative;
       width: 100%;
-      max-width: 800px; /* Cambia el ancho máximo según tu diseño */
+      max-width: 1000px; /* Cambia el ancho máximo según tu diseño */
       margin: 0 auto; /* Centra el mapa y los botones horizontalmente */
     }
   
@@ -40,10 +41,12 @@
   <div class="map-container">
     <!-- Botones para cambiar entre los mapas -->
     <div class="map-buttons">
+      <button class="btn btn-Success" onclick="mostrarMapa('https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d251169.23731710538!2d-78.61535819783214!3d-7.008947607810582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1shospitales%20donacion%20de%20sangre!5e0!3m2!1ses-419!2spe!4v1696338244780!5m2!1ses-419!2spe')">Ver todos</button>
       <button class="btn btn-warning" onclick="mostrarMapa('https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15835.155112137823!2d-78.5166834!3d-7.1504047!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b25aee9be170a9%3A0x35e8c5750a98a8a6!2sESSALUD%20II%20Consultorios!5e0!3m2!1ses-419!2spe!4v1696207306937!5m2!1ses-419!2spe')">ESSALUD II Consultorios</button>
       <button class="btn btn-warning" onclick="mostrarMapa('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.7413321969207!2d-78.5136686!3d-7.1558763999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b25afa4b07b721%3A0x854bc4ffafb173a!2sHOSPITAL%20SIMON%20BOL%C3%8DVAR!5e0!3m2!1ses-419!2spe!4v1696207523716!5m2!1ses-419!2spe')">HOSPITAL SIMON BOLÍVAR</button>
       <button class="btn btn-warning" onclick="mostrarMapa('https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3958.715286986036!2d-78.5099457!3d-7.1588783!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b25ae349c89533%3A0x7a0cfc9e38c905b3!2sEsSalud%20Hospital%20II%20-%20Cajamarca%20-%20Nivel%20II%202!5e0!3m2!1ses-419!2spe!4v1696207761148!5m2!1ses-419!2spe')">EsSalud Hospital II</button>
       <button class="btn btn-warning" onclick="mostrarMapa('https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.5025191694094!2d-78.48782609999999!3d-7.183354599999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91b25b3867e58765%3A0x37e27ac10c5dce09!2sHOSPITAL%20REGIONAL%20DE%20CAJAMARCA!5e0!3m2!1ses-419!2spe!4v1696207851353!5m2!1ses-419!2spe')">HOSPITAL REGIONAL</button>
+      
     </div>
     
     <!-- El mapa se mostrará aquí cuando se haga clic en un botón -->

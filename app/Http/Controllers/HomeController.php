@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable{}
 
 class HomeController extends Controller
 {

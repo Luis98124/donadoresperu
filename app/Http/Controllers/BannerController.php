@@ -9,14 +9,21 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
+use function Laravel\Prompts\alert;
+
 class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('banner.index');
+        $busqueda = $request ->busqueda;
+        $banners=Banner::where('nombre','LIKE','%'.$busqueda.'%')->orWhere('apellido','LIKE','%'.$busqueda.'%')->orWhere('tipo','LIKE','%'.$busqueda.'%')->latest('id')->PAGINATE();
+        $data =[
+            'banners'=>$banners
+        ];
+        return view('banner.index',$data);
     }
 
     /**
@@ -39,7 +46,7 @@ class BannerController extends Controller
             'edad' => ['required','integer','min:18','max:50'],
             'telefono' => ['required','size:9'],
             'email' => ['required','email:rfc,dns'],
-            'tipo' => ['required', 'in:a-,A-,b-,B-,ab-,AB-,o-,O-,rh-,RH-,a+,A+,b+,B+,ab+,AB+,o+,O+,rh+,RH+'],
+            'tipo' => ['required'],
 
         ]);
         $banners =new Banner();
@@ -49,42 +56,51 @@ class BannerController extends Controller
         $banners->tipo=$request->get('tipo');
         $banners->telefono=$request->get('telefono');
         $banners->email=$request->get('email');
-        $banners->comentario=$request->get('comentario');
+        $banners->comentario=("");
+        $banners->verificacion=("Proceso");
         $banners->save();
-        return redirect('/');
+        return redirect('/banner');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit( $id)
     {
-        
+        $banner = Banner::find($id);
+
+        return view('banner.edit')->with('banner',$banner);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage.    
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $request->validate([
+            'nombre' => 'required',
+            'comentario' => 'required',
+            'apellido' => 'required',
+            'edad' => ['required','integer','min:18','max:50'],
+            'telefono' => ['required','size:9'],
+            'email' => ['required','email:rfc,dns'],
+            'tipo' => ['required'],
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-       
+        ]);
+        $banners=Banner::find($id);
+        $banners->nombre=$request->get('nombre');
+        $banners->apellido=$request->get('apellido');
+        $banners->edad=$request->get('edad');
+        $banners->tipo=$request->get('tipo');
+        $banners->telefono=$request->get('telefono');
+        $banners->email=$request->get('email');
+        $banners->comentario=$request->get('comentario');
+        $banners->verificacion=$request->get('verificacion');
+        $banners->save();
+        return redirect('/banner');
     }
+    public function destroy(string $id)
+        {
+            $banner = Banner::find($id)->delete();
+    
+            return redirect()->route('banner.index');
+        }
     public function nuevo()
     {
         return view('banner.nosotros');
@@ -93,5 +109,8 @@ class BannerController extends Controller
     {
         return view('banner.hospital');
     }
-
+    public function VerBannerDatos(Request $request)
+    {
+            
+    }
 } 

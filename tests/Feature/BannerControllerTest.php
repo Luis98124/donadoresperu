@@ -29,7 +29,11 @@ class BannerControllerTest extends TestCase
             'edad' => 25,
             'telefono' => '123456789',
             'email' => 'johndoe@example.com',
+<<<<<<< HEAD
             'tipo' => 'a+',
+=======
+            'tipo' => 'A+',
+>>>>>>> gula
             // Add other required fields here
         ];
 
