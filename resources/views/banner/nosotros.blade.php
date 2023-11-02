@@ -1,8 +1,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 @extends('layouts.app')
 <style>
-    body{
-        background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
+    body {
+        background-image: url("https://images.unsplash.com/photo-1603366615917-1fa6dad5c4fa?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fHw%3D");
     }
 </style>
 @section('content')
@@ -12,14 +12,17 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #18aad7;
+            background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
+
             box-shadow: 0 0 10px rgba(60, 172, 236, 0.1);
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #18aad7;
+            background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
+            text-align: center;
+            overflow-x: ;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         
@@ -32,6 +35,9 @@
             font-size: 15px;
             line-height: 1.6;
             text-align: center;
+        }
+        ul{
+            text-align-last: center;
         }
     </style>  
 </head>

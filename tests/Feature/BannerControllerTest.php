@@ -10,7 +10,7 @@ use App\Models\User; // Asegúrate de importar el modelo User
 
 class BannerControllerTest extends TestCase
 {
-    use RefreshDatabase; // Agrega esta línea para que las pruebas tengan acceso a la base de datos
+    
 
     protected function setUp(): void
     {
@@ -33,6 +33,15 @@ class BannerControllerTest extends TestCase
             'tipo' => 'a+',
 =======
             'tipo' => 'A+',
+<<<<<<< HEAD
+>>>>>>> gula
+=======
+            'terminos' => 'Aceptada',
+            'verificacion' => 'Proceso',
+            'comentario' => 'nn',
+
+
+
 >>>>>>> gula
             // Add other required fields here
         ];
@@ -42,30 +51,6 @@ class BannerControllerTest extends TestCase
         $response->assertStatus(302); // Check that the response is a redirect
         $response->assertRedirect('/'); // Check that it redirects to the specified URL
         // Add more assertions as needed
-    }
-
-    /**
-     * Test the index method of the BannerController.
-     */
-    public function testIndex()
-    {
-        $response = $this->get('/banner'); 
-
-        $response->assertStatus(200); // Check that the response is OK
-        $response->assertViewIs('banner.index'); // Check that the correct view is returned
-        // Add more assertions as needed
-    }
-    //public function testMapaView()
-    //{
-       // $response = $this->get('banner.mapa'); 
-
-        //$response->assertStatus(200); // Verifica que la vista se cargue correctamente (código 200)
-       // $response->assertViewIs('banner.hospital'); // Reemplaza 'mapa' con el nombre real de tu vista
-       // $response->assertSee('ESSALUD II Consultorios'); // Reemplaza con el texto esperado en la vista
-       // $response->assertSee('HOSPITAL SIMON BOLÍVAR');
-       // $response->assertSee('EsSalud Hospital II');
-       // $response->assertSee('HOSPITAL REGIONAL');
-   // }
-    
+    }//
 }
 

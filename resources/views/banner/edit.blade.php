@@ -25,9 +25,9 @@
             @enderror
         </div>
        <div class="container mt-4">
-        <label for="edad" class="form-label">EDAD</label>
-        <input id="edad" name="edad" type="number" class="form-control" tabindex="3" value="{{$banner->edad}}">
-        @error('edad')
+        <label for="fecha" class="form-label">FECHA DE NACIMIENTO</label>
+        <input id="fecha" name="fecha" type="date" class="form-control" tabindex="3" value="{{$banner->fecha}}">
+        @error('fecha')
         <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
     @enderror
         </div>

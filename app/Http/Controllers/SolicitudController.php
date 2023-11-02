@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Solicitud;
+use Closure;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 /**
@@ -107,17 +109,31 @@ class SolicitudController extends Controller
         return redirect()->route('solicituds.index')
             ->with('success', 'Solicitud deleted successfully');
 =======
+=======
+use Illuminate\Support\Facades\Gate;
+>>>>>>> gula
 use Spatie\Ignition\Contracts\Solution;
+
 
 class SolicitudController extends Controller
 {
  
 
-    /* public function __construct() {
-        $this->middleware('can:solicitud.create')->only('create','store');
-        $this->middleware('can:solicitud.index')->only('edit','destroy','show','index');
-    }*/
+    public function __construct() {
+        $this->middleware('can:donador')->only('create','store');
+        $this->middleware('can:admin')->only('edit','destroy','show','update','index');
+        
+        
+    }
+    public function auth()
+    {
+        if (auth()->check()) {
+            return view('solicitud.index');
+        } else {
+            return view('principal.index');
+        }
 
+    }
     public function index(Request $request)
     {
         $busqueda = $request ->busqueda;
@@ -130,6 +146,7 @@ class SolicitudController extends Controller
             'solicitud'=>$solicituds
         ];
         return view('solicitud.index',$data);
+        
     }
 
     public function create()
@@ -145,7 +162,9 @@ class SolicitudController extends Controller
             'solicitante' => 'required',
             'nombre_apellidos' => 'required',
             'DNI' => ['required', 'size:8'],
-            'tipo_sangre' => ['required'],
+            'tipo_sangre' => ['required'], 
+            'terminos' => ['required'], 
+
 
         ]);
         $solicituds =new Solicitud();
@@ -153,7 +172,9 @@ class SolicitudController extends Controller
         $solicituds->nombre_apellidos=$request->get('nombre_apellidos');
         $solicituds->DNI=$request->get('DNI');
         $solicituds->tipo_sangre=$request->get('tipo_sangre');
+        $solicituds->terminos=("Aceptado");
         $solicituds->save();
+        session()->flash('success', 'SE MUESTRA LOS DATOS COINCIDENTES ');
         return redirect("/donadore?busqueda={$solicituds->tipo_sangre}");
     }
 

@@ -33,11 +33,16 @@ class AppServiceProvider extends ServiceProvider
                 return $imc <= 25;
             });
         }
-    
+        
         private function calcularIMC($talla, $peso) {
+            if (empty($talla)) {
+                return "La talla no puede estar vacía";
+            }
+            
             $alturaMetros = $talla / 100; // Convertir la altura a metros
             return $peso / ($alturaMetros * $alturaMetros);
         }
+        
     
     
 }

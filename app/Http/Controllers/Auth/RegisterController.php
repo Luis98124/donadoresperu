@@ -65,18 +65,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function create(array $data, $i=0)
     {
-    $user = User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password']),
-    ]);
-
-    // Asignar el rol de donador
-    $donadorRole = Role::where('name', 'donador')->first();
-    $user->assignRole($donadorRole);
-
-    return $user;
+        
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+        // Asignar el rol de donador
+        $donadorRole = Role::where('name', 'donador')->first();
+        $user->assignRole($donadorRole); 
+        return $user;
 }
 }

@@ -21,7 +21,6 @@
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <span id="card_title">
 <<<<<<< HEAD
                                 {{ __('Solicitud') }}
@@ -99,7 +98,7 @@
 											<td>{{ $solicituds->nombre_apellidos }}</td>
 											<td>{{ $solicituds->DNI }}</td>
 											<td>{{ $solicituds->tipo_sangre }}</td>
-
+                                            
                                             <td>
                                                 <form action="{{ route('solicitud.destroy',$solicituds->id) }}" method="POST">
                                                     

@@ -13,9 +13,19 @@ use function Laravel\Prompts\alert;
 
 class BannerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct() {
+        
+        $this->middleware('can:admin')->only('edit','destroy','show','update','index');
+    }
+    public function auth()
+    {
+        if (auth()->check()) {
+            return view('banner.index');
+        } else {
+            return view('principal.index');
+        }
+
+    }
     public function index(Request $request)
     {
         $busqueda = $request ->busqueda;
@@ -43,23 +53,26 @@ class BannerController extends Controller
         $request->validate([
             'nombre' => 'required',
             'apellido' => 'required',
-            'edad' => ['required','integer','min:18','max:50'],
             'telefono' => ['required','size:9'],
             'email' => ['required','email:rfc,dns'],
             'tipo' => ['required'],
+            'terminos' => ['required'],
+            'fecha' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')]
 
         ]);
         $banners =new Banner();
         $banners->nombre=$request->get('nombre');
         $banners->apellido=$request->get('apellido');
-        $banners->edad=$request->get('edad');
+        $banners->fecha=$request->get('fecha');
         $banners->tipo=$request->get('tipo');
         $banners->telefono=$request->get('telefono');
         $banners->email=$request->get('email');
         $banners->comentario=("");
         $banners->verificacion=("Proceso");
+        $banners->terminos=("Aceptada");
         $banners->save();
-        return redirect('/banner');
+        session()->flash('success', 'El registro se creó correctamente.');
+        return redirect('/principal');
     }
     public function edit( $id)
     {
@@ -77,16 +90,16 @@ class BannerController extends Controller
             'nombre' => 'required',
             'comentario' => 'required',
             'apellido' => 'required',
-            'edad' => ['required','integer','min:18','max:50'],
             'telefono' => ['required','size:9'],
             'email' => ['required','email:rfc,dns'],
             'tipo' => ['required'],
+            'fecha' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')]
 
         ]);
         $banners=Banner::find($id);
         $banners->nombre=$request->get('nombre');
         $banners->apellido=$request->get('apellido');
-        $banners->edad=$request->get('edad');
+        $banners->fecha=$request->get('fecha');
         $banners->tipo=$request->get('tipo');
         $banners->telefono=$request->get('telefono');
         $banners->email=$request->get('email');
@@ -109,8 +122,9 @@ class BannerController extends Controller
     {
         return view('banner.hospital');
     }
-    public function VerBannerDatos(Request $request)
+    public function terminos(Request $request)
     {
-            
+        return view('banner.terminos');
     }
+
 } 
