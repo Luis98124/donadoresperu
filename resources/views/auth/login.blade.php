@@ -2,19 +2,16 @@
 
 <style>
     body {
-        background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
+        background-image: url("https://images.unsplash.com/photo-1603366615917-1fa6dad5c4fa?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fHw%3D");
     }
     .card {
-        background-color: rgba(255, 255, 255, 0.9);
+        background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
         border: none;
-        box-shadow: 0 0 10px #84CD0E;
+        box-shadow: 0 0 10px #00bfff6a;
         border-radius: 10px;
     }
     .card-header {
-        background-color: #84CD0E;
-        color: white;
+        color:#000000;
         text-align: center;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
@@ -64,11 +61,11 @@
                             </div>
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">INGRESAR</button>
+                            <button type="submit" class="btn btn-dark">INGRESAR</button>
                         </div>
                         <div class="text-center mt-3">
                             @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">CONTRASEÑA OLVIDADA</a>
+                                <a class="btn btn-link" href="{{ route('register') }}" style="color:#fffff">CONTRASEÑA OLVIDADA</a>
                             @endif
                         </div>
                     </form>

@@ -43,7 +43,7 @@
                                         
 										<th>Nombre</th>
 										<th>Apellido</th>
-										<th>Edad</th>
+										<th>Fecha de nacimiento</th>
 										<th>Tipo De Sangre</th>
 										<th>Telefono</th>
 										<th>Email</th>
@@ -61,7 +61,7 @@
                                             
 											<td>{{ $banner->nombre }}</td>
 											<td>{{ $banner->apellido }}</td>
-											<td>{{ $banner->edad }}</td>
+											<td>{{ $banner->fecha }}</td>
 											<td>{{ $banner->tipo }}</td>
 											<td>{{ $banner->telefono }}</td>
 											<td>{{ $banner->email }}</td>

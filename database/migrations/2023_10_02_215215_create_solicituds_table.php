@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nombre_apellidos');
             $table->integer('DNI');
             $table->string('tipo_sangre');
+            $table->string('terminos');
             $table->timestamps();
         });
     }

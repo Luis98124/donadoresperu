@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->integer('edad');
+            $table->string('fecha');
             $table->string('tipo');
             $table->integer('telefono');
             $table->string('email');
             $table->string('comentario');
             $table->string('verificacion');
+            $table->string('terminos');
             $table->timestamps();
         });
     }

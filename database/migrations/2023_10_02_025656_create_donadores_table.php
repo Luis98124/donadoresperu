@@ -19,11 +19,12 @@ return new class extends Migration
             $table->string('fnacimiento');
             $table->string('peso');
             $table->string('sexo');
-            $table->string('fecha');
+            $table->string('fecha')->nullable();
             $table->string('tipo');
             $table->string('telefono');
             $table->string('correo');
             $table->string('verificaccion');
+            $table->string('terminos');
             $table->timestamps();
         });
     }

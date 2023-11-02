@@ -7,15 +7,24 @@
 </style>
 
 @section('content')
+    @if(session('success'))
+        <div id="success-popup" class="alert alert-info" role="alert" style="width:fit-content;" style="float:unset">
+            {{ session('success') }}
+        </div>
+        <script>
+            // Muestra la ventana emergente durante 3 segundos
+            setTimeout(function() {
+            document.getElementById('success-popup').style.display = 'none';}, 3000);
+        </script>
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">@can('admin')  
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <span id="card_title">
-                                Registro de todos los donadores
+                                Registro de Donadores
                             </span>
 
                              <div class="float-right">
@@ -28,12 +37,7 @@
                                 <button class="btn btn-success" type="submit" value="Buscar">Search</button>
                             </form>@endcan
                         </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+                    </div> 
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -97,3 +101,4 @@
         </div>
     </div>
 @endsection
+

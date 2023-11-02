@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Ui\Presets\React;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Validation\Rules\Can;
 use Spatie\Ignition\Contracts\Solution;
 
 
@@ -24,18 +25,24 @@ use Spatie\Ignition\Contracts\Solution;
  */
 class DonadoreController extends Controller
 { 
+    public function __construct() {
+        $this->middleware('can:donador')->only('create','store','index');
+        $this->middleware('can:admin')->only('edit','destroy','show','update');
+    }
+    public function auth()
+    {
+        if (auth()->check()) {
+            return view('donadore.index');
+        } else {    
+            return view('principal.index');
+        }
 
+    }
     
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $busqueda = $request ->busqueda;
-        $donadores=Donadore::where('usuario','LIKE','%'.$busqueda.'%')
-        ->orWhere('dni','LIKE','%'.$busqueda.'%')
+        $donadores=Donadore::where('dni','LIKE','%'.$busqueda.'%')
         ->orWhere('tipo','LIKE','%'.$busqueda.'%')->latest('id')->PAGINATE();
         $data =[
             'donadore'=>$donadores
@@ -58,6 +65,7 @@ class DonadoreController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'usuario' => ['required'],
             'dni' => ['required', 'size:8'],
             'talla' => ['required', 'integer', 'min:150', 'max:180', 'imc'],
             'peso' => ['required', 'integer', 'min:55', 'max:90', 'imc'],
@@ -66,7 +74,8 @@ class DonadoreController extends Controller
             'telefono' => ['required', 'size:9'],
             'correo' => ['required','email:rfc,dns'],
             'tipo' => ['required'],
-            'fecha' => ['required', 'date_format:Y-m-d', 'fecha'],
+            'terminos' => ['required'],
+            'fecha' => [ 'nullable','date_format:Y-m-d', 'fecha'],
             'imc' => ['imc'], // Aquí utilizamos la regla personalizada 'imc'
         ]);
         
@@ -82,8 +91,10 @@ class DonadoreController extends Controller
         $donadores->telefono=$request->get('telefono');
         $donadores->correo=$request->get('correo');
         $donadores->verificaccion=("Proceso");
+        $donadores->terminos=("Aceptado");
         $donadores->save();
-        return redirect('/donadore');
+        session()->flash('success', 'USTED HA SIDO REGISTRADO COMO DONADOR.');
+        return redirect('/principal');
         
     }
 
@@ -105,9 +116,8 @@ class DonadoreController extends Controller
             'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
             'sexo' => ['required'],
             'telefono' => ['required', 'size:9'],
-            'correo' => ['required','email:rfc,dns'],
             'tipo' => ['required'],
-            'fecha' => ['required', 'date_format:Y-m-d', 'fecha'],
+            'fecha' => [ 'nullable','date_format:Y-m-d', 'fecha'],
             'imc' => ['imc'], // Aquí utilizamos la regla personalizada 'imc'
         ]);
         $donadores =Donadore::find($id);
