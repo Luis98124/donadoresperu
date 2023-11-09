@@ -16,21 +16,11 @@ class RoleSeeder extends Seeder
     {
         $admin=Role::create(['name'=>'admin']);
         $donador=Role::create(['name'=>'donador']);
+        $donadoractivo=Role::create(['name'=>'donadoractivo']);
+
 
         Permission::create(['name'=>'admin'])->syncRoles([$admin]);
         Permission::create(['name'=>'donador'])->syncRoles([$donador]);
-
-        
-
-
-    
- 
-
-
-
-
-
-
-
+        Permission::create(['name'=>'donadoractivo'])->syncRoles([$donadoractivo]);
     }
 }

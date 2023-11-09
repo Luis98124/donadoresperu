@@ -18,7 +18,7 @@
 </head>
     <body>
         <div id="app"> 
-            <nav class="navbar navbar-expand-md "style="background-color: #000000; box-shadow: 0 0 500px #ffffff;">
+            <nav class="navbar navbar-expand-md "style="background-color: #000000; box-shadow: 0 0 500px #ffffff;" style="position:fixed" style="top:0">
                     <img src="http://localhost/DONADORESPERU/resources/views/banner/LogoDP.png" alt="Logo" width="100" height="40" class="d-inline-block align-text-top"></a>
                     <a class="navbar-brand" style="color: #ffffff" href="{{ url('/') }}">Donadores Peru</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -29,6 +29,7 @@
                     
                     @can('donador') <a class="navbar-brand" id="miBoton" style="color: #ffffff" href="{{route('donadore.create')}}">DONAR</a>@endcan
                     @can('donador') <a class="navbar-brand" style="color: #ffffff" href="{{route('solicitud.create')}}">SOLICITAR SANGRE</a>@endcan
+                    @can('donadoractivo') <a class="navbar-brand" style="color: #ffffff" href="{{route('solicitud.create')}}">SOLICITAR SANGRE</a>@endcan
                     @can('admin') 
                     <a class="navbar-brand" style="color: #ffffff" href="{{route('banner.index')}}">Ver Campaña</a>
                     <a class="navbar-brand" style="color: #ffffff" href="{{route('solicitud.index')}}">Ver Solicitudes</a>

@@ -132,7 +132,7 @@
             <div class="col">
                 <label for="usuario" class="form-label">NOMBRE</label>
                 <a style="font-size: 75%" style=""> *ESCRIBIR SU NOMBRE COMPLETO</a>
-                <input id="usuario" name="usuario" type="text" class="form-control" tabindex="1" value="{{ old('usuario') }}">
+                <input id="usuario" name="usuario" type="text" class="form-control" tabindex="1" value="{{ Auth::user()->name }}">
                 @error('usuario')
                     <span style="color: rgba(255, 5, 5, 0.8">{{ $message }}</span>
                 @enderror
@@ -150,14 +150,14 @@
             <div class="col">
                 <label for="" class="form-label">Estatura</label><br>
                 <a style="font-size: 75%" style=""> *En Centimetros ej. 165</a>
-                <input id="talla" name="talla" type="number" class="form-control" tabindex="2" value="{{old('talla')}}">
+                <input id="talla" name="talla" type="number" class="form-control" tabindex="3" value="{{old('talla')}}">
                 @error('talla')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
             </div>
             <div class="col">
                 <label for="" class="form-label">Fecha de Nacimiento</label>
-                <input id="fnacimiento" name="fnacimiento" type="date" class="form-control" tabindex="20" value="{{old('fnacimiento')}}">
+                <input id="fnacimiento" name="fnacimiento" type="date" class="form-control" tabindex="4" value="{{old('fnacimiento')}}">
                 @error('fnacimiento')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
@@ -165,7 +165,7 @@
             <div class="col">
                 <label for="" class="form-label">PESO</label><br>
                 <a style="font-size: 75%" > *En kilogramos ej. 65</a>
-                <input id="peso" name="peso" type="number" class="form-control" tabindex="4" value="{{old('peso')}}">
+                <input id="peso" name="peso" type="number" class="form-control" tabindex="5" value="{{old('peso')}}">
                 @error('peso')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
@@ -174,9 +174,9 @@
         <div class="row">
             <div class="col">
                 <label for="" class="form-label">SEXO</label><br>
-                <input type="radio" name="sexo" value="M" tabindex="5" {{ old('sexo') === 'M' ? 'checked' : '' }} >MASCULINO
-                <input type="radio" name="sexo" value="F" tabindex="6" {{ old('sexo') === 'F' ? 'checked' : '' }}>FEMENINO <br>
-                <input type="radio" name="sexo" value="N/S" tabindex="7" {{ old('sexo') === 'N/S' ? 'checked' : '' }}>PREFIERO NO DECIRLO
+                <input type="radio" name="sexo" value="M" tabindex="6" {{ old('sexo') === 'M' ? 'checked' : '' }} >MASCULINO
+                <input type="radio" name="sexo" value="F" tabindex="7" {{ old('sexo') === 'F' ? 'checked' : '' }}>FEMENINO <br>
+                <input type="radio" name="sexo" value="N/S" tabindex="8" {{ old('sexo') === 'N/S' ? 'checked' : '' }}>PREFIERO NO DECIRLO
                 @error('sexo')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{ $message }}</span><br>
                     @enderror
@@ -184,7 +184,7 @@
             <div class="col">
                 <label for="" class="form-label">Fecha de Ultima Donación</label><br>
                 <a>Dejarla vacia en caso no haya donado nunca</a>
-                <input id="fecha" name="fecha" type="date" class="form-control" tabindex="20" value="{{old('fecha')}}">
+                <input id="fecha" name="fecha" type="date" class="form-control" tabindex="9" value="{{old('fecha')}}">
                 @error('fecha')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">La fecha de tu ultima donacion no puede ser menor a tu fecha de nacimiento mas 18 años</span><br>
                 @enderror
@@ -212,7 +212,7 @@
             </div>
             <div class="col">
                 <label for="" class="form-label">Telefono</label>
-                <input id="telefono" name="telefono" type="number" class="form-control" tabindex="2" value="{{old('telefono')}}">
+                <input id="telefono" name="telefono" type="number" class="form-control" tabindex="20" value="{{old('telefono')}}">
                 @error('telefono')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
@@ -222,23 +222,20 @@
         <div class="row">
             <div class="col">
                 <label for="" class="form-label" >CORREO ELECTRONICO</label>
-                <input id="correo" name="correo" type="email" class="form-control" tabindex="1" value="{{old('correo')}}">
-                @error('correo')
-                    <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
-                @enderror
+                <input id="correo" name="correo" type="email" class="form-control" tabindex="21" Disabled value="{{ Auth::user()->email }}">
             </div>
 
         </div>
         <div class="row">
             <div class="col">
-                <input type="radio" name="terminos" value="Aceptada" tabindex="16" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank"> Acepto Términos y Condiciones</a>
+                <input type="radio" name="terminos" value="Aceptada" tabindex="22" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank"> Acepto Términos y Condiciones</a>
                 @error('terminos')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
             </div>
 
         </div>
-                <button type="submit" class="btn btn-save" tabindex="22">Guardar</button></div>
+                <button type="submit" class="btn btn-save" tabindex="23">Guardar</button></div>
             </div>
         </form>
     </div>
