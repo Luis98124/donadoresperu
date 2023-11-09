@@ -6,16 +6,17 @@ use App\Models\Donadore;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Auth;
 use App\Models\Banner;
 use Carbon\Carbon;
+use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Ui\Presets\React;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Can;
+use PhpParser\Node\Expr\Assign;
 use Spatie\Ignition\Contracts\Solution;
-
 
 
 
@@ -72,7 +73,7 @@ class DonadoreController extends Controller
             'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
             'sexo' => ['required'],
             'telefono' => ['required', 'size:9'],
-            'correo' => ['required','email:rfc,dns'],
+            /*'correo' => ['required','email:rfc,dns'],*/
             'tipo' => ['required'],
             'terminos' => ['required'],
             'fecha' => [ 'nullable','date_format:Y-m-d', 'fecha'],
@@ -89,13 +90,11 @@ class DonadoreController extends Controller
         $donadores->fecha=$request->get('fecha');
         $donadores->tipo=$request->get('tipo');
         $donadores->telefono=$request->get('telefono');
-        $donadores->correo=$request->get('correo');
+        $donadores->correo=(Auth::user()->email);
         $donadores->verificaccion=("Proceso");
         $donadores->terminos=("Aceptado");
         $donadores->save();
         session()->flash('success', 'USTED HA SIDO REGISTRADO COMO DONADOR.');
-        return redirect('/principal');
-        
     }
 
 

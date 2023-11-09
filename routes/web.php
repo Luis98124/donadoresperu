@@ -42,6 +42,7 @@ Route::get('/terminos', 'App\Http\Controllers\BannerController@terminos')->name(
 Route::get('/solicitud', 'App\Http\Controllers\SolicitudController@index')->name('solicitud.index')->middleware('auth');
 Route::get('/banner', 'App\Http\Controllers\BannerController@index')->name('banner.index')->middleware('auth');
 Route::get('/donadore', 'App\Http\Controllers\DonadoreController@index')->name('donadore.index')->middleware('auth');
+Route::get('/actualizar-rol', 'App\Http\Controllers\UserController@index')->name('user.updateRole');
 
 >>>>>>> gula
 

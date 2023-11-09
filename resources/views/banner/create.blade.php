@@ -25,7 +25,7 @@
             padding: 20px;
             width: 120%; 
             border-radius: 10px;
-            margin-top: 20px;
+            margin-top:110px;
         }
         .container3 {
             padding: 20px;
@@ -45,12 +45,14 @@
         .responsive-image {
             max-width: 50%;
             height:auto;
-            width: 30%;
+            width: auto;
             float: left; /* Coloca la imagen a la derecha */
             margin: 21px;
         }
         
         .title {
+            
+            margin-left: 8%;
             color: #fff;
             font-size: 30px;
             font-weight: bold;
@@ -105,7 +107,7 @@
 <div class="text-center">
    
         @csrf
-        <span class="title">FORMULARIO DE REGISTRO EN CAMPAÑAS DE DONACIÓN </span>
+        <span class="title">REGISTRO EN CAMPAÑAS DE DONACIÓN </span>
         <div class="btn-cancel">
             <a href="/donadoresperu/public/banner"class="btn btn-success" tabindex="16" >Cancelar</a>
         </div>     
