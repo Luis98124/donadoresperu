@@ -6,6 +6,7 @@
 
 @section('content')
 <head>
+    <title>Registrarse en Campaña</title>
     <style>
         body {
             background-image: url("https://images.unsplash.com/photo-1603366615917-1fa6dad5c4fa?auto=format&fit=crop&q=80&w=1000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTB8fHxlbnwwfHx8fHw%3D");
@@ -109,7 +110,7 @@
         @csrf
         <span class="title">REGISTRO EN CAMPAÑAS DE DONACIÓN </span>
         <div class="btn-cancel">
-            <a href="/donadoresperu/public/banner"class="btn btn-success" tabindex="16" >Cancelar</a>
+            <a href="/donadoresperu/public/principal"class="btn btn-success" tabindex="16" >Cancelar</a>
         </div>     
 <div class="form-left">
     <body>
@@ -189,7 +190,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <input type="radio" name="terminos" value="Aceptada" tabindex="16" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank"> Acepto Términos y Condiciones</a>
+                <input type="radio" name="terminos" value="Aceptada" tabindex="16" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank" rel="noopener"> Acepto Términos y Condiciones</a>
                 @error('terminos')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror

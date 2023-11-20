@@ -101,7 +101,7 @@
 <div class="text-center">
     <span class="title">Registrarme como Donador</span>
     <div class="bt-cancel">
-            <a href="/donadoresperu/public/banner" class="btn btn-cancel" tabindex="21">Cancelar</a>       
+            <a href="/donadoresperu/public/principal" class="btn btn-cancel" tabindex="21">Cancelar</a>       
     </div>
 <div class="form-left">
     <body>
@@ -132,14 +132,14 @@
             <div class="col">
                 <label for="usuario" class="form-label">NOMBRE</label>
                 <a style="font-size: 75%" style=""> *ESCRIBIR SU NOMBRE COMPLETO</a>
-                <input id="usuario" name="usuario" type="text" class="form-control" tabindex="1" value="{{ Auth::user()->name }}">
+                <input id="usuario" name="usuario" type="text" class="form-control" tabindex="1" value="{{ old('usuario')  }}">
                 @error('usuario')
                     <span style="color: rgba(255, 5, 5, 0.8">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col">
                 <label for="dni" class="form-label">DNI</label>
-                    <input id="dni" name="dni" type="number" class="form-control" tabindex="2" value="{{ old('dni') }}">
+                    <input id="dni" name="dni" type="number" class="form-control" tabindex="2" value="{{old('dni') }}">
                     @error('dni')
                         <span style="color: rgba(255, 5, 5, 0.8">{{ $message }}</span>
                     @enderror
@@ -228,14 +228,14 @@
         </div>
         <div class="row">
             <div class="col">
-                <input type="radio" name="terminos" value="Aceptada" tabindex="22" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank"> Acepto Términos y Condiciones</a>
+                <input type="radio" name="terminos" value="Aceptada" tabindex="22" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank" rel="noopener"> Acepto Términos y Condiciones</a>
                 @error('terminos')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
             </div>
 
         </div>
-                <button type="submit" class="btn btn-save" tabindex="23">Guardar</button></div>
+                <button id="miBoton" type="submit" class="btn btn-save" tabindex="23">Guardar</button></div>
             </div>
         </form>
     </div>

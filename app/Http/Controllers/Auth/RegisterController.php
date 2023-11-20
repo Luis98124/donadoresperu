@@ -74,8 +74,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         // Asignar el rol de donador
-        $donadorRole = Role::where('name', 'donador')->first();
-        $user->assignRole($donadorRole); 
-        return $user;
+        $donadorRole = Role::where('name','donador')->first();
+        $user->assignRole($donadorRole);return $user;
 }
 }

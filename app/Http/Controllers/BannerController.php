@@ -29,7 +29,10 @@ class BannerController extends Controller
     public function index(Request $request)
     {
         $busqueda = $request ->busqueda;
-        $banners=Banner::where('nombre','LIKE','%'.$busqueda.'%')->orWhere('apellido','LIKE','%'.$busqueda.'%')->orWhere('tipo','LIKE','%'.$busqueda.'%')->latest('id')->PAGINATE();
+        $banners=Banner::where('nombre','LIKE','%'.$busqueda.'%')
+        ->orWhere('apellido','LIKE','%'.$busqueda.'%')
+        ->orWhere('tipo','LIKE','%'.$busqueda.'%')
+        ->latest('id')->PAGINATE();
         $data =[
             'banners'=>$banners
         ];

@@ -75,5 +75,5 @@
         </section>
     </div>
 </body>
-</html>
+</html>  
 @endsection

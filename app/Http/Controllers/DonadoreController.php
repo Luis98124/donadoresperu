@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Banner;
 use Carbon\Carbon;
+use Database\Seeders\RoleSeeder;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
@@ -17,8 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Can;
 use PhpParser\Node\Expr\Assign;
 use Spatie\Ignition\Contracts\Solution;
-
-
+use Spatie\Permission\Models\Role;
 
 /**
  * Class DonadoreController
@@ -70,7 +70,8 @@ class DonadoreController extends Controller
             'dni' => ['required', 'size:8'],
             'talla' => ['required', 'integer', 'min:150', 'max:180', 'imc'],
             'peso' => ['required', 'integer', 'min:55', 'max:90', 'imc'],
-            'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()
+            ->subYears(18)->format('Y-m-d')],
             'sexo' => ['required'],
             'telefono' => ['required', 'size:9'],
             /*'correo' => ['required','email:rfc,dns'],*/
@@ -94,7 +95,10 @@ class DonadoreController extends Controller
         $donadores->verificaccion=("Proceso");
         $donadores->terminos=("Aceptado");
         $donadores->save();
+        session(['formularioEnviado' => true]);
         session()->flash('success', 'USTED HA SIDO REGISTRADO COMO DONADOR.');
+        return view('Principal.index');
+        
     }
 
 
@@ -112,7 +116,8 @@ class DonadoreController extends Controller
             'dni' => ['required', 'size:8'],
             'talla' => ['required', 'integer', 'min:150', 'max:180', 'imc'],
             'peso' => ['required', 'integer', 'min:55', 'max:90', 'imc'],
-            'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
+            'fnacimiento' => ['required', 'date_format:Y-m-d', 'before_or_equal:' . now()->subYears(18)
+            ->format('Y-m-d')],
             'sexo' => ['required'],
             'telefono' => ['required', 'size:9'],
             'tipo' => ['required'],
@@ -132,7 +137,7 @@ class DonadoreController extends Controller
         $donadores->correo=$request->get('correo');
         $donadores->verificaccion=$request->get('verificaccion');
         $donadores->save();
-        return redirect('/donadore');
+        return view('Principal.index');
 
     }
 

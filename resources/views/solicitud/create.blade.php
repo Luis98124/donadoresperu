@@ -97,11 +97,19 @@
             background-color: #18aad7;
         }
     </style>
-
+ @if(session('formularioEnviado'))
+ <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+ <script>
+     $(document).ready(function() {
+     // Si el formulario ya ha sido enviado, oculta el botón
+     $('#miBoton').hide();
+     });
+ </script>
+@endif   
 <div class="text-center">
     <span class="title">Registrar una solicitud de busqueda</span>
     <div class="bt-cancel">
-            <a href="/donadoresperu/public/banner" class="btn btn-cancel" tabindex="21">Cancelar</a>       
+            <a href="/donadoresperu/public/principal" class="btn btn-cancel" tabindex="21">Cancelar</a>       
     </div>
 <div class="form-left">
     <body>
@@ -175,7 +183,7 @@
         </div>
         <div class="row">
             <div class="col">
-                <input type="radio" name="terminos" value="Aceptada" tabindex="16" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank"> Acepto Términos y Condiciones</a>
+                <input type="radio" name="terminos" value="Aceptada" tabindex="16" {{ old('terminos') === 'Aceptada' ? 'checked' : '' }}> <a href='http://localhost/donadoresperu/public/terminos' target="_blank" rel="noopener"> Acepto Términos y Condiciones</a>
                 @error('terminos')
                     <br><span style="color: rgba(255, 5, 5, 0.333)">{{$message}}</span><br>
                 @enderror
