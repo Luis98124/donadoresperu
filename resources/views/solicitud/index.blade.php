@@ -109,6 +109,7 @@
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
                                             </td>
+                                           
                                         </tr>
                                     @endforeach
                                 </tbody>

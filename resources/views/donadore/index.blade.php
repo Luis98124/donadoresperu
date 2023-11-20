@@ -1,7 +1,6 @@
- 
 @extends('layouts.app')
 <style>
-    body{
+    body {
         background-image: url('https://marketplace.canva.com/EAEK4dC2olw/1/0/1600w/canva-arco%C3%ADris-gradiente-rosa-y-naranja-fondo-virtual-c3PYha1JI9M.jpg');
     }
 </style>
@@ -14,7 +13,8 @@
         <script>
             // Muestra la ventana emergente durante 3 segundos
             setTimeout(function() {
-            document.getElementById('success-popup').style.display = 'none';}, 3000);
+                document.getElementById('success-popup').style.display = 'none';
+            }, 3000);
         </script>
     @endif
     <div class="container-fluid">
@@ -35,7 +35,8 @@
                               <form action="{{ route('donadore.index') }}" method="get" class="d-flex">
                                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="busqueda">
                                 <button class="btn btn-success" type="submit" value="Buscar">Search</button>
-                            </form>@endcan
+                            </form>
+                            @endcan
                         </div>
                     </div> 
 
@@ -45,44 +46,59 @@
                                 <thead class="thead">
                                     <tr>
                                         @can('admin')  
-                                        <th>No</th>@endcan
-										<th>USUARIO</th>
+                                        <th>No</th>
+                                        @endcan
+                                        <th>USUARIO</th>
                                         @can('admin')  
-										<th>DNI</th>
-										<th>TALLA</th>
-										<th>FECHA DE NACIMIENTO</th>
-										<th>PESO</th>
-										<th>SEXO</th>
-										<th>FECHA DE ULTIMA DONACION</th>@endcan
-										<th>TIPO DE SANGRE</th>
-										<th>TELEFONO</th>
-										<th>EMAIL</th>
+                                        <th>DNI</th>
+                                        <th>TALLA</th>
+                                        <th>FECHA DE NACIMIENTO</th>
+                                        <th>PESO</th>
+                                        <th>SEXO</th>
+                                        <th>FECHA DE ULTIMA DONACION</th>
+                                        @endcan
+                                        <th>TIPO DE SANGRE</th>
+                                        <th>TELEFONO</th>
+                                        <th>EMAIL</th>
                                         <th>ESTADO DE VERIFICACION</th>
-
-
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($donadore as $donadores)
-                                        <tr>
+                                        @php
+                                            // Verificar la antigüedad de la última donación
+                                            $fechaLimite = now()->subMonths(4);
+                                            $fechaDonacion = $donadores->fecha ? \Carbon\Carbon::parse($donadores->fecha) : null;
+                                            $esAntiguo = $fechaDonacion && $fechaDonacion->lte($fechaLimite);
+                                            $esHoy = $fechaDonacion && $fechaDonacion->isToday();
+
+                                            // Determinar el estilo CSS en base al rol y antigüedad
+                                            $style = '';
+                                            if (\Gate::allows('admin') && (!$esAntiguo && !$esHoy)) {
+                                                $style="color: red;"; // Fondo rojo para el rol admin
+                                            } elseif (!$esAntiguo && $fechaDonacion) {
+                                                continue; // No mostrar si no cumple con la antigüedad y está vacía para el rol donador
+                                            }
+                                        @endphp
+
+                                        <tr style="{{ $style }}">
                                             @can('admin')  <td>{{ $donadores->id}}</td> @endcan            
                                             
-											<td>{{ $donadores->usuario }}</td>
-											@can('admin')<td>{{ $donadores->dni }}</td>
-											<td>{{ $donadores->talla }}</td>
-											<td>{{ $donadores->fnacimiento }}</td>
-											<td>{{ $donadores->peso }}</td>
-											<td>{{ $donadores->sexo }}</td>
-											<td>{{ $donadores->fecha }}</td>@endcan
-											<td>{{ $donadores->tipo }}</td>
-											<td>{{ $donadores->telefono }}</td>
-											<td>{{ $donadores->correo}}</td>
-											<td>{{ $donadores->verificaccion }}</td>
+                                            <td>{{ $donadores->usuario }}</td>
+                                            @can('admin')<td>{{ $donadores->dni }}</td>
+                                            <td>{{ $donadores->talla }}</td>
+                                            <td>{{ $donadores->fnacimiento }}</td>
+                                            <td>{{ $donadores->peso }}</td>
+                                            <td>{{ $donadores->sexo }}</td>
+                                            <td>{{ $donadores->fecha }}</td>@endcan
+                                            <td>{{ $donadores->tipo }}</td>
+                                            <td>{{ $donadores->telefono }}</td>
+                                            <td>{{ $donadores->correo}}</td>
+                                            <td>{{ $donadores->verificaccion }}</td>
 
                                             <td>@can('admin') 
                                                 <form action="{{ route('donadore.destroy',$donadores->id) }}" method="POST">
-                                                    
                                                     <a class="btn btn-sm btn-success" href="{{ route('donadore.edit',$donadores->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
@@ -101,4 +117,3 @@
         </div>
     </div>
 @endsection
-

@@ -84,7 +84,7 @@
             setTimeout(function() {
             document.getElementById('success-popup').style.display = 'none';}, 3000);
         </script>
-    @endif
+    @endif            
 <header>
     <h1>¡Salva Vidas!</h1>
     <h5>Únete a nuestra campaña de donación de sangre y ayuda a quienes más lo necesitan.</h5>

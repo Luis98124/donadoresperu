@@ -40,7 +40,17 @@
     .map-wrapper {
       padding-top: 40px; /* Ajusta según la altura de los botones */
     }
+    
   </style>
+  @if(session('formularioEnviado'))
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          // Si el formulario ya ha sido enviado, oculta el botón
+          $('#miBoton').hide();
+      });
+  </script>
+@endif   
   <div class="map-container">
     <div class="map-buttons">
       <button id="ver-todos" class="btn btn btn-info" onclick="mostrarMapa('https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d251169.23731710538!2d-78.61535819783214!3d-7.008947607810582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1shospitales%20donacion%20de%20sangre!5e0!3m2!1ses-419!2spe!4v1696338244780!5m2!1ses-419!2spe')">Ver todos</button>

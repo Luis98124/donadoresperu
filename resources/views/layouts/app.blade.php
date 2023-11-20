@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    @if(session('formularioEnviado'))
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+        // Si el formulario ya ha sido enviado, oculta el botón
+        $('#miBoton').hide();
+        });
+    </script>
+    @endif 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,8 +69,6 @@
                     <a class="navbar-brand" style="color: #ffffff" href="{{route('solicitud.index')}}">Ver Solicitudes</a>
                     <a class="navbar-brand" style="color: #ffffff" href="{{route('donadore.index')}}">Ver Donadores</a>
                     @endcan
-                        
-                    
                     <div class="collapse navbar-collapse " id="navbarSupportedContent" style="margin-right: 5%">
                         <ul class="navbar-nav ms-auto" style="float: right">
                                 <li class="nav-item"  style="float: right" >
